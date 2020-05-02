@@ -20,7 +20,7 @@ function unsubscriber(randomDelay) {
     setTimeout(function () {
         document.getElementById("confirm-button").click()
         count--;
-        console.log(count + " remaining");
+        console.log("Remaining: ", count);
 
         setTimeout(function () {
             unsubscribedElement = document.querySelector("ytd-channel-renderer");

@@ -7,30 +7,42 @@
 - Insert the code below in your console
 
 ```javascript
-var count = document.querySelectorAll("ytd-channel-renderer:not(.ytd-item-section-renderer)").length;
-var randomDelay = 500;
+function youtubeUnsubscriber() {
+    var count = document.querySelectorAll("ytd-channel-renderer:not(.ytd-item-section-renderer)").length;
+    var randomDelay = 500;
+    
+    if(count == 0) return false;
 
-function unsubscriber(randomDelay) {
+    function unsubscribeVisible(randomDelay) {
 
-    if (count == 0) return false;
+        if (count == 0) {
+            window.scrollTo(0,document.body.scrollHeight);
+            setTimeout(function() {
+                youtubeUnsubscriber();
+            }, 10000)
+        }
 
-    unsubscribeButton = document.querySelector('.ytd-subscribe-button-renderer');
-    unsubscribeButton.click();
-
-    setTimeout(function () {
-        document.getElementById("confirm-button").click()
-        count--;
-        console.log("Remaining: ", count);
+        unsubscribeButton = document.querySelector('.ytd-subscribe-button-renderer');
+        unsubscribeButton.click();
 
         setTimeout(function () {
-            unsubscribedElement = document.querySelector("ytd-channel-renderer");
-            unsubscribedElement.parentNode.removeChild(unsubscribedElement);
-            unsubscriber(randomDelay)
+            document.getElementById("confirm-button").click()
+            count--;
+            console.log("Remaining: ", count);
+
+            setTimeout(function () {
+                unsubscribedElement = document.querySelector("ytd-channel-renderer");
+                unsubscribedElement.parentNode.removeChild(unsubscribedElement);
+                unsubscribeVisible(randomDelay)
+            }, randomDelay);
         }, randomDelay);
-    }, randomDelay);
+    }
+
+    unsubscribeVisible(randomDelay);
 }
 
-unsubscriber(randomDelay);
+youtubeUnsubscriber();
+
 ```
 
 ## References

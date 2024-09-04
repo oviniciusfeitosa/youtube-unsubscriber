@@ -26,7 +26,7 @@ function youtubeUnsubscriber() {
         unsubscribeButton.click();
 
         setTimeout(function () {
-            document.getElementById("confirm-button").click()
+            document.getElementById("checkbox-enabled-confirm-button").click() // confirm button id has changed
             count--;
             console.log("Remaining: ", count);
 
